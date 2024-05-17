@@ -1,8 +1,11 @@
-﻿namespace exam_timer_ava.ViewModels;
+﻿using ReactiveUI.Fody.Helpers;
+
+namespace exam_timer_ava.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+    [Reactive]
+    public bool ShowSettings { get; set; } = true;
+
+    public void ShowHideSettings() => ShowSettings = !ShowSettings;
 }
