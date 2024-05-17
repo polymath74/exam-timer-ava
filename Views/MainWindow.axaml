@@ -20,11 +20,11 @@
     <SplitView
         IsPaneOpen="{Binding ShowSettings}"
         DisplayMode="CompactInline"
-        OpenPaneLength="250">
+        OpenPaneLength="320">
         <SplitView.Pane>
-            <StackPanel
-                Orientation="Horizontal">
+            <DockPanel>
                 <Button
+                    DockPanel.Dock="Left"
                     Width="48"
                     Height="48"
                     VerticalAlignment="Top"
@@ -33,15 +33,91 @@
                         Source="/Assets/settings_icon.png" />
                 </Button>
                 <StackPanel
+                    IsVisible="{Binding ShowSettings}"
+                    Margin="10"
                     Orientation="Vertical">
                     <RadioButton
-                        Content="Perusal" />
+                        Content="Perusal"
+                        IsChecked="{Binding HasPerusal}" />
                     <RadioButton
-                        Content="Planning" />
+                        Content="Planning"
+                        IsChecked="{Binding HasPlanning}" />
+                    <DockPanel
+                        Margin="40 0 0 10">
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Margin="0 0 5 0"
+                            VerticalAlignment="Center">Minutes:</TextBlock>
+                        <NumericUpDown
+                            Value="{Binding PreparationMinutes}"
+                            Minimum="0"
+                            Maximum="60"
+                            Increment="5"
+                            IsEnabled="{Binding CanSetPreparation}" />
+                    </DockPanel>
                     <RadioButton
-                        Content="None" />
+                        Content="None"
+                        IsChecked="{Binding HasNoPrep}" />
+                    <DockPanel
+                        Margin="0 20 0 0">
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Margin="0 0 5 0"
+                            VerticalAlignment="Center">Working minutes:</TextBlock>
+                        <NumericUpDown
+                            Value="{Binding WorkingMinutes}"
+                            Minimum="5"
+                            Maximum="180"
+                            Increment="5" />
+                    </DockPanel>
+                    <Grid
+                        ColumnDefinitions="auto,*"
+                        RowDefinitions="auto,auto,auto"
+                        Margin="0 10 0 0">
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            IsVisible="{Binding HasEffectivePreparation}"
+                            DockPanel.Dock="Left"
+                            Margin="0 0 5 0"
+                            VerticalAlignment="Center"
+                            Text="{Binding PreparationName,StringFormat={}{0}:}" />
+                        <TimePicker
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            IsVisible="{Binding HasEffectivePreparation}"
+                            ClockIdentifier="24HourClock"
+                            MinuteIncrement="5"
+                            SelectedTime="{Binding PreparationStartTime}" />
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            DockPanel.Dock="Left"
+                            Margin="0 0 5 0"
+                            VerticalAlignment="Center"
+                            Text="Start:" />
+                        <TimePicker
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            ClockIdentifier="24HourClock"
+                            MinuteIncrement="5"
+                            SelectedTime="{Binding WorkingStartTime}" />
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            DockPanel.Dock="Left"
+                            Margin="0 0 5 0"
+                            VerticalAlignment="Center"
+                            Text="Finish:" />
+                        <TimePicker
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            ClockIdentifier="24HourClock"
+                            MinuteIncrement="5"
+                            SelectedTime="{Binding FinishTime}" />
+                    </Grid>
                 </StackPanel>
-            </StackPanel>
+            </DockPanel>
         </SplitView.Pane>
         <TextBlock
             HorizontalAlignment="Center"
