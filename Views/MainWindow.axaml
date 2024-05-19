@@ -19,22 +19,22 @@
     </Design.DataContext>
     <Window.Styles>
         <Style
-            Selector="Panel#mainPanel.preparation">
+            Selector="DockPanel#mainPanel.preparation">
             <Setter
                 Property="Background"
-                Value="Blue" />
+                Value="SkyBlue" />
         </Style>
         <Style
-            Selector="Panel#mainPanel.working">
+            Selector="DockPanel#mainPanel.working">
             <Setter
                 Property="Background"
-                Value="Green" />
+                Value="MediumSpringGreen" />
         </Style>
         <Style
-            Selector="Panel#mainPanel.finished">
+            Selector="DockPanel#mainPanel.finished">
             <Setter
                 Property="Background"
-                Value="Orange" />
+                Value="Gold" />
         </Style>
     </Window.Styles>
     <SplitView

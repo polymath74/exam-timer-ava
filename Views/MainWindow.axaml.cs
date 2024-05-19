@@ -85,8 +85,8 @@ public partial class MainWindow : Window
         else
         {
             if (lastActivity != "finished") {
-                ViewModel.CurrentActivity = "finished";
-                ViewModel.RemainingTime = string.Empty;
+                ViewModel.CurrentActivity = "Finished";
+                ViewModel.RemainingTime = TimeSpan.Zero.ToString(@"hh\:mm\:ss");
                 mainPanel.Classes.Remove("preparation");
                 mainPanel.Classes.Remove("working");
                 mainPanel.Classes.Add("finished");
