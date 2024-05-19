@@ -42,9 +42,9 @@ public class MainWindowViewModel : ViewModelBase
     public TimeSpan FinishTime { get; set; }
 
     [Reactive]
-    public string CurrentActivity { get; } = string.Empty;
+    public string CurrentActivity { get; set; } = string.Empty;
     [Reactive]
-    public string RemainingTime { get; } = string.Empty;
+    public string RemainingTime { get; set; } = string.Empty;
 
     public MainWindowViewModel()
     {
@@ -59,6 +59,9 @@ public class MainWindowViewModel : ViewModelBase
             .ToPropertyEx(this, x => x.HasEffectivePreparation);
         this.WhenAnyValue(x => x.HasPerusal, x => x.HasPlanning, (perusal, planning) => perusal ? "Perusal" : planning ? "Planning" : "No Prep")
             .ToPropertyEx(this, x => x.PreparationName);
+        
+        // this.WhenAnyValue(x => x.HasEffectivePreparation)
+        //     .Subscribe(_ => WorkingStartTime = PreparationStartTime.Add(TimeSpan.FromMinutes(PreparationMinutes ?? 0)));
 
         this.WhenAnyValue(x => x.PreparationStartTime, x => x.PreparationMinutes)
             .Subscribe(_ => WorkingStartTime = PreparationStartTime.Add(TimeSpan.FromMinutes(PreparationMinutes ?? 0)));
